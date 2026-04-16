@@ -30,8 +30,8 @@ const TrafficMap: React.FC<Props> = ({ traffic, routes, selectedRouteId, startId
   };
 
   const selectedRoutePoints = selectedRoute?.path
-    .map(id => getNodeById(id))
-    .filter(Boolean) as { x: number; y: number }[];
+    ? selectedRoute.path.map(id => getNodeById(id)).filter(Boolean) as { x: number; y: number }[]
+    : [];
 
   const renderRoutePolyline = (route: RouteResult, width: number, opacity: number, dash?: string) => {
     const points = route.path
@@ -148,8 +148,8 @@ const TrafficMap: React.FC<Props> = ({ traffic, routes, selectedRouteId, startId
         ))}
 
         {/* Selected route path */}
-        {renderRoutePolyline(selectedRoute, 14, 0.18)}
-        {renderRoutePolyline(selectedRoute, 6, 0.95, '18 12')}
+        {selectedRoute && selectedRoute.path?.length > 1 && renderRoutePolyline(selectedRoute, 14, 0.18)}
+        {selectedRoute && selectedRoute.path?.length > 1 && renderRoutePolyline(selectedRoute, 6, 0.95, '18 12')}
 
         {/* Route node markers */}
         {selectedRoutePoints.map((point, idx) => (
