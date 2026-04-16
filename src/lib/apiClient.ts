@@ -4,8 +4,8 @@
 import { generateTrafficData, TrafficData } from '@/lib/trafficSimulator';
 import { findRoutes, RouteResult } from '@/lib/router';
 import { predictCongestion, Prediction } from '@/lib/aiPredictor';
+import { API_BASE } from '@/lib/env';
 
-const API_BASE = import.meta.env.VITE_API_URL ?? '';
 
 export interface ApiStatus {
   source: 'server' | 'fallback';
